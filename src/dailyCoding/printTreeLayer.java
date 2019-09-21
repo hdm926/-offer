@@ -14,7 +14,7 @@ public class printTreeLayer {
 	        	queue.add(root);
 	        }
 	        
-	        //addNode(root);
+	        
 	        
 	        while(!queue.isEmpty()) {
 	        	root=queue.poll();
