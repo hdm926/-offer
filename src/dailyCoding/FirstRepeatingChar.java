@@ -27,11 +27,11 @@ public class FirstRepeatingChar {
 		Iterator<Map.Entry<Character, Integer>> it = map.entrySet().iterator();
 		
 		while(it.hasNext()) {
-			System.out.println(it.next());
-			if(it.next().getValue()==1) {
+			Map.Entry<Character, Integer> entry=it.next();
+			if(entry.getValue()==1) {
 				//System.out.print(it.next());
-				//System.out.print(str.indexOf(it.next().getKey())-1);
-				//break;
+				return str.indexOf(entry.getKey());
+				
 			}
 			    
 		}
