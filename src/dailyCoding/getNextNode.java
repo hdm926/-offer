@@ -6,10 +6,12 @@ package dailyCoding;
  */
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class getNextNode {
 	
-	//static ArrayList<TreeLinkNode> list = new ArrayList<>();全局变量是可行的
+	static ArrayList<TreeLinkNode> list = new ArrayList<>();
+	
 	public static TreeLinkNode GetNext(TreeLinkNode pNode)
     {
         //找到根节点
@@ -19,7 +21,8 @@ public class getNextNode {
 			root=root.next;
 		}
 		ArrayList<TreeLinkNode> list = new ArrayList<>();
-		list=mid(root);//中序遍历的返回值没有完全传过来？
+		list=mid(root);
+		
 		for(TreeLinkNode node : list) {
 			System.out.println(node.val);
 		}
@@ -34,15 +37,31 @@ public class getNextNode {
     }
 	//中序遍历
 	public static ArrayList<TreeLinkNode> mid(TreeLinkNode root){
-		ArrayList<TreeLinkNode> list = new ArrayList<>();
-		if(root!=null) {
+		//每一次递归都新建了一个新的list,最后的返回值不对
+		/*if(root!=null) {
 		   mid(root.left);
            list.add(root);
            System.out.print(root.val+",");
            mid(root.right);
 		}
-        return list;
-	}
+        */
+		//非递归
+		Stack<TreeLinkNode> stack = new Stack<>();
+		TreeLinkNode pRoot = root;
+		while(root!=null || !stack.isEmpty()) {
+		    while(pRoot!=null) {
+			   stack.push(pRoot);
+			   pRoot=pRoot.left;
+		    }
+		    
+		    if(!stack.isEmpty()) {
+			   TreeLinkNode p = stack.peek();
+			   list.add(p);
+			   p=p.right;	
+		}
+		
+		}
+	} 
 	public static void main(String[] arg) {
 		TreeLinkNode node1= new TreeLinkNode(1);
 		TreeLinkNode node2 = new TreeLinkNode(2);
